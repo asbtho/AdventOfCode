@@ -13,7 +13,6 @@ def main():
         for c, ch in enumerate(row):
             rowinput.append(".")
         emptyGrid.append(rowinput)
-    #emptyGrid[start[0]][start[1]] = "S"
 
     directions = ((0,1),(1,0),(-1,0),(0,-1))
     results = []
@@ -26,8 +25,10 @@ def main():
     print("Part 1: " + str(results))
 
     emptyGrid = paintLoop(start,grid,results[0][3],emptyGrid)
+    emptyGrid, internalcount = checkInternal(emptyGrid)
     for r, row in enumerate(emptyGrid):
         print("".join(row))
+    print("INTERNAL COUNT: " + str(internalcount))
 
 
 def startLoop(start,grid,startDir):
@@ -53,9 +54,43 @@ def paintLoop(start,grid,startDir,emptyGrid):
         emptyGrid[nCoords[0]][nCoords[1]] = char
         nCoords,prevCoords = tuple(map(sum, zip(nCoords,getNextClockwise(char,nCoords,prevCoords)))),nCoords
         if char == "S":
+            emptyGrid[nCoords[0]][nCoords[1]] = "F"
             break
     return emptyGrid
-    
+
+def checkInternal(emptyGrid):
+    internalcount = 0
+    for r, row in enumerate(emptyGrid):
+        outside = True
+        f_found = False
+        l_found = False
+        for c, ch in enumerate(row):
+            if ch == "|":
+                outside = not outside
+            if ch == "7":
+                if f_found:
+                    f_found = False
+                if l_found:
+                    outside = not outside
+                    l_found = False
+            if ch == "F":
+                f_found = True
+            if ch == "L":
+                l_found = True
+            if ch == "J":
+                if f_found:
+                    outside = not outside
+                    f_found = False
+                if l_found:
+                    l_found = False
+            if ch == ".":
+                if not outside:
+                    internalcount += 1
+                    emptyGrid[r][c] = "I"
+                else:
+                    emptyGrid[r][c] = "O"
+    return emptyGrid, internalcount
+
 
 def getNextClockwise(char,nCoords,prevCoords):
     if char == "|":
