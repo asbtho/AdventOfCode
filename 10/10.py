@@ -39,7 +39,7 @@ def startLoop(start,grid,startDir):
         count += 1
         char = grid[nCoords[0]][nCoords[1]]
         print(char + " on coords: " + str(nCoords) + " on count: " + str(count))
-        nCoords,prevCoords = tuple(map(sum, zip(nCoords,getNextClockwise(char,nCoords,prevCoords)))),nCoords
+        nCoords,prevCoords = tuple(map(sum, zip(nCoords,getNext(char,nCoords,prevCoords)))),nCoords
         if char == "S":
             return count, 1
         if char == "." or nCoords == prevCoords:
@@ -52,7 +52,7 @@ def paintLoop(start,grid,startDir,emptyGrid):
     while True:
         char = grid[nCoords[0]][nCoords[1]]
         emptyGrid[nCoords[0]][nCoords[1]] = char
-        nCoords,prevCoords = tuple(map(sum, zip(nCoords,getNextClockwise(char,nCoords,prevCoords)))),nCoords
+        nCoords,prevCoords = tuple(map(sum, zip(nCoords,getNext(char,nCoords,prevCoords)))),nCoords
         if char == "S":
             emptyGrid[nCoords[0]][nCoords[1]] = "F"
             break
@@ -92,7 +92,7 @@ def checkInternal(emptyGrid):
     return emptyGrid, internalcount
 
 
-def getNextClockwise(char,nCoords,prevCoords):
+def getNext(char,nCoords,prevCoords):
     if char == "|":
         if prevCoords[0] < nCoords[0]:
             return (1,0)
