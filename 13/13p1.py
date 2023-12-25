@@ -12,8 +12,6 @@ def main():
             pattern.append(line)
     patterns.append(pattern)
 
-    #print(patterns)
-
     total = 0
 
     for pattern in patterns:
