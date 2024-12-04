@@ -13,10 +13,10 @@ int treatNumber(vector<int> vec, bool part2, ofstream& outFile){
 
 	vector<int> extra;
 
-    for (int thisnum : vec) {
+	for (int thisnum : vec) {
 		cout << thisnum << " ";
-        outFile << thisnum << " ";
-        counter++;
+		outFile << thisnum << " ";
+		counter++;
 		extra.push_back(thisnum);
 		if (!safe){
 			continue;
@@ -120,7 +120,7 @@ int treatNumber(vector<int> vec, bool part2, ofstream& outFile){
 			prevprev = prev;
 			prev = thisnum;
 		}
-    }
+	}
 	if (safe) {
 		returnValue++;
 	}
@@ -139,7 +139,7 @@ int treatNumber(vector<int> vec, bool part2, ofstream& outFile){
 }
 
 int main() {
-    ofstream outFile("output.txt");
+	ofstream outFile("output.txt");
 	// Create a text string, which is used to output the text file
 	string myText;
 
