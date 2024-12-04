@@ -126,7 +126,7 @@ int treatNumber(vector<int> vec, bool part2, ofstream& outFile){
 	}
 
 	cout << " - safe : " << safe << endl;
-    outFile << " - safe : " << safe << endl;
+	outFile << " - safe : " << safe << endl;
 
 	if(part2 && !safe){
 		cout << "Running part 2 with one removed:" << endl;
